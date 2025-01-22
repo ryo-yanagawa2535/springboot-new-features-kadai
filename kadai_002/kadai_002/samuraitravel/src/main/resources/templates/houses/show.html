@@ -162,7 +162,7 @@
                                 <div class="row justify-content-center mb-4" sec:authorize="isAuthenticated()" th:unless="${reviewFlag}">
                                     <div class="col-lg-4">
                                         <!-- aタグへth:hrefにて/houses/(houseのgetId())/reviews/registerを設定 -->
-                                        <a th:href="@{/houses/{houseId}/reviews/register(houseId=${house.getId()})}">レビューを投稿する</a>
+                                        <a th:href="@{/houses/{houseId}/reviews/register(houseId=${house.getId()})}" class="btn text-white shadow-sm w-100 samuraitravel-btn">レビューを投稿する</a>
                                     </div>
                                 </div>
                                 <!-- divタグへth:ifにてreviewListが無い(##lists.isEmpty)を設定 -->
