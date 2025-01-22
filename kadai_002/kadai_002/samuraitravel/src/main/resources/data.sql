@@ -100,5 +100,7 @@ INSERT IGNORE INTO reviews (id, house_id, user_id, content, score) VALUES (8, 1,
 INSERT IGNORE INTO reviews (id, house_id, user_id, content, score) VALUES (9, 1, 9, 'イマイチだった', 3);
 INSERT IGNORE INTO reviews (id, house_id, user_id, content, score) VALUES (10, 1, 10, 'イマイチだった', 2);
 INSERT IGNORE INTO reviews (id, house_id, user_id, content, score) VALUES (11, 1, 11, 'イマイチだった', 3);
+INSERT IGNORE INTO reviews (id, house_id, user_id, content, score) VALUES (12, 1, 12, 'イマイチだった', 3);
+
 
 
