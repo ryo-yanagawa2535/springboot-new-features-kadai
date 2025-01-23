@@ -45,21 +45,21 @@
                                                          <a href="#" class="samuraitravel-link-danger" data-bs-toggle="modal" th:data-bs-target="'#deleteReviewModal' + ${review.getId()}">削除</a>
                                                          <!-- 削除用モーダルを作成(admin/houses/index.htmlの削除用モーダルを参照してみてください) -->
                                                          
-                                                          <div class="modal fade" th:id="${'deleteHouseModal' + house.getId()}" tabindex="-1" th:aria-labelledby="${'deleteHouseModalLabel' + house.getId()}">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" th:id="${'deleteHouseModalLabel' + house.getId()}" th:text="${house.getName() + 'を削除してもよろしいですか？'}"></h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <form method="post"th:action="@{/admin/houses/__${house.getId()}__/delete}">
-                                                            <button type="submit" class="btn samuraitravel-btn-danger text-white shadow-sm">削除</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>   
+                                                          <div class="modal fade" th:id="${'deleteReviewModal' + review.getId()}" tabindex="-1" th:aria-labelledby="${'deleteReviewModalLabel' + review.getId()}">
+                                             <div class="modal-dialog">
+                                                 <div class="modal-content">
+                                                     <div class="modal-header">
+                                                         <h5 class="modal-title" th:id="${'deleteReviewModalLabel' + review.getId()}">レビューを削除しますか？</h5>
+                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+                                                     </div>
+                                                     <div class="modal-footer">
+                                                         <form method="post"th:action="@{/houses/__${house.getId()}__/reviews/__${review.getId()}__/delete}">
+                                                             <button type="submit" class="btn samuraitravel-btn-danger text-white shadow-sm">削除</button>
+                                                         </form>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </div> 
                                                          </div>                                                                                                            
                                                      </span>      
                                                  </div>                                              
