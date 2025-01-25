@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.samuraitravel.entity.Favorite;
 import com.example.samuraitravel.entity.House;
 import com.example.samuraitravel.entity.Review;
 import com.example.samuraitravel.entity.User;
@@ -23,6 +24,7 @@ import com.example.samuraitravel.repository.HouseRepository;
 import com.example.samuraitravel.repository.ReviewRepository;
 import com.example.samuraitravel.security.UserDetailsImpl;
 import com.example.samuraitravel.service.ReviewService;
+
 
 @Controller
 @RequestMapping("/houses")
@@ -89,23 +91,31 @@ public class HouseController {
 			@AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
 
 		House house = houseRepository.getReferenceById(id);
-
 		boolean reviewFlag = false;
 		boolean favoriteFlag = false;
+		Favorite favorite = null;
 
 		if (userDetailsImpl != null) {
 			User user = userDetailsImpl.getUser();
 			reviewFlag = reviewService.hasUserAlreadyReviewed(house, user);
+
+			favoriteFlag = favoriteService.isFavorite(house, user);
+		
+		    if (favoriteFlag) {
+	            favorite = favoriteRepository.findByHouseAndUser(house, user);
+	        }
 		}
+			
 		model.addAttribute("reviewFlag", reviewFlag);
 		List<Review> reviewList = reviewRepository.findTop6ByHouseOrderByCreatedAtDesc(house);
 		model.addAttribute("reviewList", reviewList);
 		long totalCount = reviewRepository.countByHouse(house);
 		model.addAttribute("totalCount", totalCount);
-
 		model.addAttribute("house", house);
 		model.addAttribute("reservationInputForm", new ReservationInputForm());
-
+		model.addAttribute("favoriteFlag", favoriteFlag);
+		model.addAttribute("favorite", favorite);
+		
 		return "houses/show";
 	}
-}
+  }
