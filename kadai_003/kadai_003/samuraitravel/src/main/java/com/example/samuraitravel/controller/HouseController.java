@@ -111,10 +111,7 @@ public class HouseController {
 	            favorite = favoriteRepository.findByHouseAndUser(house, user).orElse(null);
 	        }
 		}
-		
-		   // 分岐文を作成、favoriteFlagがtrue(家に対してのお気に入りが存在している)の場合
-        // favoriteへfavoriteRepositoryのfindByHouseAndUserメソッド(引数house, user)をセット
-			
+					
 		model.addAttribute("reviewFlag", reviewFlag);
 		List<Review> reviewList = reviewRepository.findTop6ByHouseOrderByCreatedAtDesc(house);
 		model.addAttribute("reviewList", reviewList);

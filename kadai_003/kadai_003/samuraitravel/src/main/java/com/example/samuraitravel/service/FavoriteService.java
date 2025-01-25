@@ -30,6 +30,11 @@ import com.example.samuraitravel.repository.FavoriteRepository;
             }
              return false; // 条件を満たさない場合：falseを返却
             }
+     
+     public void delete(Integer favoriteId) {
+         favoriteRepository.deleteById(favoriteId);
+     }
+     
      }    
 
 
