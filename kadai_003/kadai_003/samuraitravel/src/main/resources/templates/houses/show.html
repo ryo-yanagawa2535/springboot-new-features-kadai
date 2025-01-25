@@ -28,6 +28,28 @@
                                 </ol>
                             </nav> 
                             
+                            
+                             <!-- お気に入り機能 ここから -->
+                                 <!-- divタグへsec:authorizeにてログイン済みを設定 -->
+                                 <div sec:authorize="isAuthenticated()">
+ 								 
+                                     <!-- divタグへth:ifにてfavoriteFlagを設定 -->
+                                     <div th:if="${favoriteFlag}">
+                                         <a href="#" onclick="event.preventDefault(); document.getElementById('favorite-form').submit();">&#9829; お気に入り解除</a>
+                                         <!-- formタグへth:actionにて/houses/(houseのgetId())/favorites/(favoriteのgetId())/deleteを設定 -->
+                                         <form method="post" th:action="@{/houses/__${house.getId()}__/favorites/__${favorite.getiId()}__/delete}" ></form>
+                                     </div>
+                                     <!-- divタグへth:unlessにてfavoriteFlagを設定 -->
+                                     <div th:unless="${favoriteFlag}">
+                                         <a href="#" onclick="event.preventDefault(); document.getElementById('favorite-form').submit();">&#9825; お気に入り追加</a>
+                                         <!-- formタグへth:actionにて/houses/(houseのgetId())/favorites/createを設定 -->
+                                         <form method="post" th:action="@{/houses/__${house.getId()}__/favorites/create}" ></form>                                          
+                                     </div>
+                                 </div>                            
+                             </div>
+                             <!-- お気に入り機能 ここまで -->
+                             
+                            
                             <h1 class="mb-4 text-center" th:text="${house.getName()}"></h1>  
                             
                           <!-- divタグへth:ifにてsuccessMessageを設定 -->

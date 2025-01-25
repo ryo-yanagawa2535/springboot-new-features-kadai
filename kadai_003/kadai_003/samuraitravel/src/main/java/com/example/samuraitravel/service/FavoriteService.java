@@ -18,13 +18,9 @@ import com.example.samuraitravel.repository.FavoriteRepository;
      
      @Transactional
      public void create(House house, User user) {
-         // Favoriteクラスのfavoriteインスタンスを作成(コンストラクタの引数は無し)
     	    Favorite favorite = new Favorite();
-         // favoriteインスタンスのsetHouseメソッドを使用(引数はhouse)
     	    favorite.setHouse(house);
-         // favoriteインスタンスのsetUserメソッドを使用(引数はuser)
     	    favorite.setUser(user);
-         // favoriteRepositoryインスタンスのsaveメソッドを使用(引数はfavorite)
     	    favoriteRepository.save(favorite);
      }
      

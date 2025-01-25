@@ -20,10 +20,13 @@ import com.example.samuraitravel.entity.House;
 import com.example.samuraitravel.entity.Review;
 import com.example.samuraitravel.entity.User;
 import com.example.samuraitravel.form.ReservationInputForm;
+import com.example.samuraitravel.repository.FavoriteRepository;
 import com.example.samuraitravel.repository.HouseRepository;
 import com.example.samuraitravel.repository.ReviewRepository;
 import com.example.samuraitravel.security.UserDetailsImpl;
+import com.example.samuraitravel.service.FavoriteService;
 import com.example.samuraitravel.service.ReviewService;
+
 
 
 @Controller
@@ -32,10 +35,12 @@ public class HouseController {
 	private final HouseRepository houseRepository;
 	@Autowired
 	private ReviewService reviewService;
-
 	@Autowired
 	private ReviewRepository reviewRepository;
-
+	@Autowired
+	private FavoriteService favoriteService;
+	@Autowired
+	private FavoriteRepository favoriteRepository; 
 	public HouseController(HouseRepository houseRepository) {
 		this.houseRepository = houseRepository;
 	}
@@ -88,6 +93,7 @@ public class HouseController {
 
 	@GetMapping("/{id}")
 	public String show(@PathVariable(name = "id") Integer id, Model model,
+			
 			@AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
 
 		House house = houseRepository.getReferenceById(id);
@@ -98,13 +104,16 @@ public class HouseController {
 		if (userDetailsImpl != null) {
 			User user = userDetailsImpl.getUser();
 			reviewFlag = reviewService.hasUserAlreadyReviewed(house, user);
-
+ 
 			favoriteFlag = favoriteService.isFavorite(house, user);
 		
 		    if (favoriteFlag) {
-	            favorite = favoriteRepository.findByHouseAndUser(house, user);
+	            favorite = favoriteRepository.findByHouseAndUser(house, user).orElse(null);
 	        }
 		}
+		
+		   // 分岐文を作成、favoriteFlagがtrue(家に対してのお気に入りが存在している)の場合
+        // favoriteへfavoriteRepositoryのfindByHouseAndUserメソッド(引数house, user)をセット
 			
 		model.addAttribute("reviewFlag", reviewFlag);
 		List<Review> reviewList = reviewRepository.findTop6ByHouseOrderByCreatedAtDesc(house);
