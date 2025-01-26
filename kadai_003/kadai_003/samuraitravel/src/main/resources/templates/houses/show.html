@@ -34,13 +34,13 @@
 									 
                                  <div th:if="${favoriteFlag}" class="d-flex justify-content-end">
                                  <a href="#" onclick="event.preventDefault(); document.getElementById('favorite-form').submit();">&#9829; お気に入り解除</a>
-                                  <form id="favorite-form-remove" method="post" th:action="@{/houses/{houseId}/favorites/{favoriteId}/delete(houseId=${house.getId()}, favoriteId=${favorite.getId()})}">
+                                  <form id="favorite-form" method="post" th:action="@{/houses/__${house.getId()}__/favorites/__${favorite.getId()}__/delete}">
                                   </form>
                                   </div> 
                                    
-                                 <div th:unless="${favoriteFlag}">
-                                 <a href="#" onclick="event.preventDefault(); document.getElementById('favorite-form-add').submit();">&#9825; お気に入り追加</a>
-                                 <form id="favorite-form-add" method="post" th:action="@{/houses/{houseId}/favorites/create(houseId=${house.getId()})}">
+                                 <div th:unless="${favoriteFlag}" class="d-flex justify-content-end">
+                                 <a href="#" onclick="event.preventDefault(); document.getElementById('favorite-form').submit();">&#9825; お気に入り追加</a>
+                                 <form id="favorite-form" method="post" th:action="@{/houses/__${house.getId()}__/favorites/create}">
                                  </form>
                                  </div>
                              </div>

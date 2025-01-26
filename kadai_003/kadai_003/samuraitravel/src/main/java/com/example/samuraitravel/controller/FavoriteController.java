@@ -46,12 +46,11 @@ public class FavoriteController {
 			@AuthenticationPrincipal UserDetailsImpl userDetailsImpl,
 			RedirectAttributes redirectAttributes,
 			Model model) {
-    	   Favorite favorite = favoriteRepository.getReferenceById(houseId);
     	   House house = houseRepository.getReferenceById(houseId);
            User user = userDetailsImpl.getUser();
            favoriteService.create(house, user);
            redirectAttributes.addFlashAttribute("successMessage", "お気に入りに追加しました。");
-           return "/houses/{houseId}";
+           return "redirect:/houses/{houseId}";
     }
     
     @PostMapping("/houses/{houseId}/favorites/{favoriteId}/delete")
